@@ -6,6 +6,7 @@ export default function Home() {
 
     const [from, setfrom] = useState("");
     const [to, setTo] = useState("");
+    
 
     const handleFrom = (e) => {
         setfrom(e.target.value);
@@ -18,6 +19,18 @@ export default function Home() {
         setfrom(to);
         setTo(from);
     }
+
+    const [travelDate, SetTravelDate] = useState(new Date().toISOString().split("T")[0]);
+
+    const handleToday = () => {
+        SetTravelDate(new Date().toISOString().split("T")[0])
+    }
+    const handleTomorrow = () => {
+        const setTomorrow = new Date();
+        setTomorrow.setDate(setTomorrow.getDate() + 1);
+        SetTravelDate(setTomorrow.toISOString().split("T")[0])
+    }
+
 
     return (
         <div className="Home ">
@@ -64,11 +77,11 @@ export default function Home() {
                         }}>
                             <div>
                                 <p>Date of Journey</p>
-                                <input type="date" />
+                                <input type="date" value={travelDate} onChange={(e) => SetTravelDate(e.target.value)}/>
                             </div>
                             <div className="flex flex-wrap gap-2 items-center ml-2">
-                                <span className="p-2 px-3 bg-red-100 rounded-xl">Today</span>
-                                <span className="p-2 px-3 bg-red-100 rounded-xl">Tommorrow</span>
+                                <span className="p-2 px-3 bg-red-100 rounded-xl" onClick={handleToday}>Today</span>
+                                <span className="p-2 px-3 bg-red-100 rounded-xl" onClick={handleTomorrow} >Tomorrow</span>
                             </div>
                         </div>
                     </div>
@@ -78,6 +91,9 @@ export default function Home() {
                             <div><h3>Booking for Women</h3><p>Know more</p></div>
                         </div>
                     </div>
+                </div>
+                <div className="findBus">
+                    <h2 className="text-2xl font-bold"> Search Buses</h2>
                 </div>
             </section>
         </div>
